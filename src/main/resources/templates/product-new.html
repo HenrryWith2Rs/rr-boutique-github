@@ -1,0 +1,73 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>New Product</title>
+    <div th:replace="fragments/head :: head">
+
+    </div>
+</head>
+<body>
+<!--  Insert header fragment-->
+<div th:insert="fragments/header :: header" ></div>
+<main class="mt-5">
+    <div class="container">
+        <!-- Form -->
+        <section class="text-center mb-4 mx-auto" style="object-fit: cover; width: 70%; height: 70%">
+            <form th:action="@{/saveProduct}" method="post" th:object="${item}">
+                <div class="form-row">
+                    <div class="form-group col-md-9">
+                        <label for="inputPicURL">Picture</label>
+                        <input type="url" class="form-control" id="inputPicURL" placeholder="Picture URL" th:name="picture">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-9">
+                        <label for="inputProdName">Name</label>
+                        <input type="text" class="form-control" id="inputProdName" placeholder="Product Name" th:name="name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-9">
+                        <label for="inputProdDesc">Description</label>
+                        <textarea type="text" class="form-control" id="inputProdDesc" placeholder="Insert happy product description" th:name="description"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="inputProdID">ID</label>
+                        <input type="number" class="form-control" id="inputProdID" placeholder="#" th:name="id">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputProdCategory">Category</label>
+                        <select id="inputProdCategory" class="form-control" th:name="category">
+                            <option selected>Choose...</option>
+                            <option value="belt">Belt</option>
+                            <option value="children">Children</option>
+                            <option value="men">Men</option>
+                            <option value="sales">Sales</option>
+                            <option value="shoes">Shoes</option>
+                            <option value="women">Women</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputProdPrice">Price</label>
+                        <input type="number" class="form-control" id="inputProdPrice" placeholder="$" th:name="price" step="0.01">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-9 text-center my-3">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+<!--  Insert Footer Fragment-->
+<div th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
+</body>
+<!-- MDB -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+</html>

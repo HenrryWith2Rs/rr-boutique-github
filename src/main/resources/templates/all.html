@@ -1,0 +1,105 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>All products</title>
+    <div th:replace="fragments/head :: head">
+
+    </div>
+</head>
+<body>
+<!--  Insert header fragment-->
+<div th:replace="fragments/header :: header" ></div>
+<main class="mt-5">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <div class="container-fluid">
+                <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarTogglerDemo01"
+                        aria-controls="navbarTogglerDemo01"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                >
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <strong class="text-dark mr-2">Categories: </strong>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/}">All</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/{id}(id=${'men'})}">Men</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/{id}(id=${'women'})}">Women</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/{id}(id=${'shoes'})}">Shoes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/{id}(id=${'children'})}">Children</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/{id}(id=${'belt'})}">Belts</a>
+                        </li>
+
+
+                    </ul>
+                    <form class="d-flex input-group w-auto">
+                        <input
+                                type="search"
+                                class="form-control"
+                                placeholder="Type query"
+                                aria-label="Search"
+                        />
+                        <button
+                                class="btn btn-outline-primary"
+                                type="button"
+                                data-mdb-ripple-color="dark"
+                        >
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!--Products section-->
+        <section class="text-center mb-4">
+            <div class="row">
+            <th:block th:each="item : ${items}">
+                <div class="col-lg-4 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="bg-image hover-zoom">
+                            <img th:src="${item.picture}" class="img-fluid"/>
+                            <a th:href="@{/product/{id}(id=${item.id})}">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${item.name}"></h5>
+                            <h6 th:text="${#strings.concat('$', item.price)}"></h6>
+                            <p class="card-text" th:text="${item.description}"></p>
+                            <p hidden th:text="${#strings.concat('ID#: ', item.id)}"></p>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            </div>
+        </section>
+
+        <!--  Insert Pagination Fragment-->
+        <div th:replace="fragments/pagination :: pagination"></div>
+    </div>
+</main>
+<!--  Insert Footer Fragment-->
+<div th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
+</body>
+<!-- MDB -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+</html>
